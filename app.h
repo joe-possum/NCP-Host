@@ -49,8 +49,11 @@ extern "C" {
  *  \brief  Handle application events.
  *  \param[in]  evt  incoming event ID
  **************************************************************************************************/
-void appHandleEvents(struct gecko_cmd_packet *evt);
-
+  void appHandleEvents(struct gecko_cmd_packet *evt);
+  const char *getAppOptions(void);
+  void appOption(int option, const char *arg);
+  void appInit(void);
+  
 /** @} (end addtogroup app) */
 /** @} (end addtogroup Application) */
 

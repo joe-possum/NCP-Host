@@ -21,6 +21,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 /* BG stack headers */
 #include "bg_types.h"
@@ -31,6 +32,32 @@
 
 // App booted flag
 static bool appBooted = false;
+
+void parse_address(const char *fmt,bd_addr *address) {
+  char buf[3];
+  int octet;
+  for(uint8 i = 0; i < 6; i++) {
+    memcpy(buf,&fmt[3*i],2);
+    buf[2] = 0;
+    sscanf(buf,"%02x",&octet);
+    address->addr[5-i] = octet;
+  }
+}
+
+const char *getAppOptions(void) {
+  return "";
+}
+
+void appOption(int option, const char *arg) {
+  switch(option) {
+  default:
+    fprintf(stderr,"Unhandled option '-%c'\n",option);
+    exit(1);
+  }
+}
+
+void appInit(void) {
+}
 
 /***********************************************************************************************//**
  *  \brief  Event handler function.
