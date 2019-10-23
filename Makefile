@@ -133,7 +133,7 @@ override CFLAGS += \
 endif
 
 # NOTE: The -Wl,--gc-sections flag may interfere with debugging using gdb.
-override LDFLAGS +=
+override LDFLAGS += -L/usr/local/lib
 
 
 ####################################################################
@@ -144,6 +144,8 @@ C_SRC +=  \
 protocol/bluetooth/ble_stack/src/host/gecko_bglib.c \
 main.c \
 app.c \
+dump.c \
+cic.c
 
 # this file should be the last added
 ifeq ($(OS),posix)
@@ -156,7 +158,7 @@ s_SRC +=
 
 S_SRC += 
 
-LIBS =
+LIBS = 
 
 
 ####################################################################
@@ -205,7 +207,7 @@ $(OBJ_DIR)/%.o: %.S
 # Link
 $(EXE_DIR)/$(PROJECTNAME): $(OBJS) $(LIBS)
 	@echo "Linking target: $@"
-	$(CC) $(LDFLAGS) $^ -o $@
+	$(CC) $(LDFLAGS) $^ -o $@ -lmbedcrypto
 
 
 clean:
